@@ -1,0 +1,45 @@
+{
+  "name": "@makkarpov/nuxt-service-worker",
+  "version": "0.1.1",
+  "license": "MIT",
+  "type": "module",
+  "author": {
+    "name": "Maxim Karpov",
+    "email": "me@m-k.mx",
+    "url": "https://github.com/makkarpov"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/module.mjs",
+      "require": "./dist/module.cjs"
+    }
+  },
+  "keywords": [
+    "nuxt",
+    "service-worker"
+  ],
+  "main": "./dist/module.cjs",
+  "types": "./dist/types.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "prepack": "nuxt-module-build && cp src/runtime.d.ts dist",
+    "dev": "nuxi dev playground",
+    "dev:build": "nuxi build playground",
+    "dev:prepare": "nuxt-module-build --stub && nuxi prepare playground",
+    "dev:preview": "node playground/.output/server/index.mjs"
+  },
+  "dependencies": {
+    "@nuxt/kit": "^3.0.0-rc.4",
+    "consola": "^2.15.3",
+    "magic-string": "^0.26.2",
+    "es-module-lexer": "^0.10.5"
+  },
+  "devDependencies": {
+    "@nuxt/module-builder": "latest",
+    "@nuxtjs/eslint-config-typescript": "latest",
+    "eslint": "latest",
+    "nuxt": "^3.0.0-rc.4"
+  }
+}
