@@ -16,7 +16,7 @@ export const DEV_SERVICE_WORKER_ROUTE = '/sw.js';
 export function installDevMiddleware(serverGetter: () => ViteDevServer, entryPoint: string) {
   addDevServerHandler({
     route: DEV_SERVICE_WORKER_ROUTE,
-    handler: async (req, res) => {
+    handler: defineEventHandler(async({ node: { req, res } }) => {
       const server = serverGetter();
       if (server === undefined) {
         res.writeHead(500);
@@ -38,7 +38,7 @@ export function installDevMiddleware(serverGetter: () => ViteDevServer, entryPoi
         res.writeHead(500);
         res.end(e.stack);
       }
-    }
+    })
   });
 }
 
