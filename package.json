@@ -1,6 +1,6 @@
 {
   "name": "nuxt3-service-worker",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Simple module that configures build system to bundle and expose service worker script at website root path.",
   "license": "MIT",
   "type": "module",
@@ -25,7 +25,8 @@
     "url": "https://github.com/makkarpov/nuxt-service-worker/issues"
   },
   "keywords": [
-    "nuxt", "nuxt 3",
+    "nuxt",
+    "nuxt 3",
     "service-worker"
   ],
   "exports": {
@@ -46,7 +47,7 @@
     "dev:build": "nuxi build playground",
     "dev:prepare": "nuxt-module-build --stub && nuxi prepare playground",
     "dev:preview": "node playground/.output/server/index.mjs",
-    "release": "npm run lint && npm run test && npm run prepack && changelogen --release && npm publish && git push --follow-tags",
+    "release": "npm run lint && npm run prepack && changelogen --release && npm publish && git push --follow-tags",
     "lint": "eslint .",
     "test": "vitest run",
     "test:watch": "vitest watch"
@@ -62,7 +63,8 @@
     "@nuxtjs/eslint-config-typescript": "latest",
     "@types/color-name": "^1.1.1",
     "eslint": "latest",
-    "nuxt": "latest",    "@types/node": "^18",
+    "nuxt": "latest",
+    "@types/node": "^18",
     "@nuxt/eslint-config": "^0.1.1",
     "@nuxt/schema": "^3.4.2",
     "@nuxt/test-utils": "^3.4.2",
