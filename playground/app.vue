@@ -5,7 +5,7 @@
     </button>
     <hr>
     <pre>{{ worker }}</pre>
-    <pre>{{ registration }}</pre>
+    <pre>{{ registration?.active }}</pre>
 
     <!-- Include function so it won't be tree-shaken, but hide it from display -->
     <span style="display: none">{{ getMeowingString() }}</span>
