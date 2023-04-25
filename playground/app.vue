@@ -18,10 +18,12 @@ import { getMeowingString } from '~/lib/swHelper'; // to test chunk reuse
 
 import worker from '#service-worker';
 
-const registration = ref(null);
+const registration = ref<ServiceWorkerRegistration>();
 
 async function registerWorker() {
-  registration.value = await navigator.serviceWorker.register(worker.url, { type: 'module' });
+  registration.value = await navigator.serviceWorker.register(worker.url, {
+    type: 'module'
+  });
 }
 </script>
 

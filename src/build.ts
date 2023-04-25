@@ -73,7 +73,7 @@ export interface BuildPlugin extends Plugin {
 }
 
 export function rollupBuildPlugin(entryPoint: string): BuildPlugin {
-  let chunkRef;
+  let chunkRef:string;
 
   const ret = <BuildPlugin> {
     name: 'service-worker:production',

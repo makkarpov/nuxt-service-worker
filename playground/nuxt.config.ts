@@ -1,11 +1,9 @@
-import { defineNuxtConfig } from 'nuxt'
-import ServiceWorker from '..'
+import { defineNuxtConfig } from 'nuxt/config';
+import ServiceWorker from '..';
 
 export default defineNuxtConfig({
-  modules: [
-    ServiceWorker
-  ],
+  modules: [ServiceWorker],
   serviceWorker: {
     entryPoint: 'sw.ts'
   }
-})
+});

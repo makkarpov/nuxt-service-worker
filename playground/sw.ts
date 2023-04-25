@@ -1,6 +1,6 @@
 // Random imports to test whether they are actually resolved:
 
-import colors from 'color-name';
+import * as colors from 'color-name';
 import { getMeowingString } from '~/lib/swHelper';
 
 // Comment for change testing: 123456
