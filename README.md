@@ -1,5 +1,7 @@
 # nuxt-service-worker
 
+A fork of `@makkarpov/nuxt-service-worker` for Nuxt 3.
+
 Simple module that configures build system to bundle and expose service worker script at website root path.
 
 Targets at and supports only Vite/Rollup tooling.
@@ -8,8 +10,12 @@ Targets at and supports only Vite/Rollup tooling.
 
 Install this package:
 
-```
-npm install --save-dev @makkarpov/nuxt-service-worker
+```sh
+# NPM
+npm install --save-dev nuxt3-service-worker
+
+# Yarn
+yarn add --dev nuxt3-service-worker
 ```
 
 Configure worker script entry point in your Nuxt configuration, e.g.:
@@ -17,7 +23,7 @@ Configure worker script entry point in your Nuxt configuration, e.g.:
 ```ts
 export default defineNuxtConfig({
   modules: [
-      '@makkarpov/nuxt-service-worker'
+      'nuxt3-service-worker'
   ],
   serviceWorker: {
       entryPoint: 'lib/worker.ts'

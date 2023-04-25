@@ -13,10 +13,10 @@ export interface ModuleOptions {
 
 export default defineNuxtModule<ModuleOptions>({
   meta: {
-    name: '@makkarpov/nuxt-service-worker',
+    name: 'nuxt3-service-worker',
     configKey: 'serviceWorker',
     compatibility: {
-      nuxt: '^3.0.0'
+      nuxt: '^3.4.0'
     }
   },
   defaults: {
