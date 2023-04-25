@@ -5,6 +5,7 @@ import { Plugin, ViteDevServer } from 'vite';
 import MagicString from 'magic-string';
 import { addDevServerHandler } from '@nuxt/kit';
 import { Nitro } from 'nitropack';
+import { defineEventHandler } from 'h3'
 import { init, parse as parseImports } from 'es-module-lexer';
 
 const SERVICE_WORKER_ID = '#service-worker';
@@ -32,7 +33,7 @@ export function installDevMiddleware(serverGetter: () => ViteDevServer, entryPoi
         const transformed = await server.pluginContainer.transform(code, pointUrl);
 
         res.writeHead(200, { 'Content-Type': 'text/javascript' });
-        res.end(transformed.code, 'utf-8');
+        res.end(transformed?.code, 'utf-8');
       } catch (e) {
         console.error(e);
         res.writeHead(500);
@@ -68,8 +69,8 @@ export function rollupPlugin(dev: boolean): Plugin {
 }
 
 export interface BuildPlugin extends Plugin {
-  workerFileName: string | undefined;
-  outputDirectory: string | undefined;
+  workerFileName?: string ;
+  outputDirectory?: string ;
 }
 
 export function rollupBuildPlugin(entryPoint: string): BuildPlugin {
@@ -133,14 +134,14 @@ export async function transformImports(source: string, resolutionPrefix: string)
   return ms.toString();
 }
 
-export async function moveOutputFile(plugin: BuildPlugin, nitro: Nitro): Promise<void> {
+export async function moveOutputFile({ outputDirectory, workerFileName }: BuildPlugin, nitro: Nitro): Promise<void> {
   const outputDir = resolve(nitro.options.buildDir, 'serviceWorker');
   const nuxtBaseDir = <string> (<any> nitro.options.runtimeConfig.app).buildAssetsDir;
   await mkdir(outputDir);
 
-  const baseFile = resolve(plugin.outputDirectory, plugin.workerFileName);
+  const baseFile = resolve(outputDirectory!, workerFileName!);
   await writeFile(
-    resolve(outputDir, plugin.workerFileName),
+    resolve(outputDir, workerFileName!),
     await transformImports(await readFile(baseFile, { encoding: 'utf-8' }), nuxtBaseDir),
     { encoding: 'utf-8' }
   );
@@ -162,9 +163,7 @@ interface ManifestFile {
 
 export async function cleanupManifests(buildDir: string, rootDir: string, entryPoint: string): Promise<void> {
   async function cleanup(file: string): Promise<boolean> {
-    if (!existsSync(file)) {
-      return;
-    }
+    if (!existsSync(file)) { return false; }
 
     const data = <ManifestFile> JSON.parse(await readFile(file, { encoding: 'utf-8' }));
     let changed = false;
